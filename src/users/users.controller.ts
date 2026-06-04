@@ -4,9 +4,14 @@ import { UsersService} from './users.service';
 import { UserEntity } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Roles } from 'src/common/decorators/roles/roles.decorator';
+import { RolesGuard } from 'src/common/roles/roles.guard';
+import { UseGuards } from '@nestjs/common';
 
 @ApiTags('Users')
 @Controller('users')
+@UseGuards(RolesGuard)  
+@Roles('admin')
 export class UsersController {
        constructor(private readonly usersService: UsersService) { }
        
